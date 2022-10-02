@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User update(Long id, User obj) {
         User objDb = userRepository.getReferenceById(id);
-        updateData(obj, objDb);
+        updateData(userRepository.getReferenceById(id), objDb);
         return userRepository.save(objDb);
     }
 

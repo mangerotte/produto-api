@@ -1,11 +1,13 @@
 package com.luizmangerotte.productapi.services.impl;
 
 import com.luizmangerotte.productapi.model.Order;
+import com.luizmangerotte.productapi.model.User;
 import com.luizmangerotte.productapi.repositories.OrderRepository;
 import com.luizmangerotte.productapi.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 public class OrderServiceImpl implements OrderService {
 
@@ -13,32 +15,35 @@ public class OrderServiceImpl implements OrderService {
     OrderRepository orderRepository;
 
     @Override
-    public Order findById(Long id) {
-        return null;
+    public Optional<Order> findById(Long id) {
+        return orderRepository.findById(id);
     }
 
     @Override
     public List<Order> findAll() {
-        return null;
+        return orderRepository.findAll();
     }
 
     @Override
     public Order insert(Order obj) {
-        return null;
+        return orderRepository.save(obj);
     }
 
     @Override
     public Order update(Long id, Order obj) {
-        return null;
+        Order objDb = orderRepository.getReferenceById(id);
+        updateData(obj, objDb);
+        return orderRepository.save(objDb);
     }
 
     @Override
     public void updateData(Order obj, Order objDb) {
-
+        objDb.setClient(obj.getClient());
+        objDb.setInstant(obj.getInstant());
     }
 
     @Override
     public void delete(Long id) {
-
+        orderRepository.deleteById(id);
     }
 }

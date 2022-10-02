@@ -23,5 +23,5 @@ public class User {
     private String phone;
     private String password;
     @OneToMany(mappedBy = "client")
-    private List<Order> orders = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 }

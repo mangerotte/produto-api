@@ -1,4 +1,4 @@
-# Event Project API
+# API Produto
 A função desta API é buscar os pedidos e produtos feitos pelos usuarios. 
 Está aplicação utiliza o padrão Rest e tem como padrão de arquitetura de projeto MVC. 
 

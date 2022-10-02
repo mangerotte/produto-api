@@ -1,5 +1,6 @@
 package com.luizmangerotte.productapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public class User {
     private String email;
     private String phone;
     private String password;
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
-    private List<User> users = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>();
 }

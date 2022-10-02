@@ -9,7 +9,7 @@ import java.util.List;
 public interface UserService {
 
 
-    User findById(Long id);
+    UserDto findById(Long id);
     List<UserDto> findAll();
     User insert(UserDto obj);
     User update(Long id, User obj);

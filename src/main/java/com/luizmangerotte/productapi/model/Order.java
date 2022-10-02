@@ -3,25 +3,24 @@ package com.luizmangerotte.productapi.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.Instant;
 
 @Entity
-@Table(name = "user_db")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@Table(name = "order_db")
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String login;
-    private String email;
-    private String phone;
-    private String password;
-    @OneToMany(mappedBy = "client")
-    private List<Order> orders = new ArrayList<>();
+    private Instant instant;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private User client;
+
 }

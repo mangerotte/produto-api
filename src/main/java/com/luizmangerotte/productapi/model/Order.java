@@ -2,7 +2,6 @@ package com.luizmangerotte.productapi.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.luizmangerotte.productapi.model.enums.OrderStatus;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

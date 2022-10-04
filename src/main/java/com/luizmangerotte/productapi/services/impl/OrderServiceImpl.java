@@ -1,7 +1,6 @@
 package com.luizmangerotte.productapi.services.impl;
 
 import com.luizmangerotte.productapi.model.Order;
-import com.luizmangerotte.productapi.model.User;
 import com.luizmangerotte.productapi.repositories.OrderRepository;
 import com.luizmangerotte.productapi.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;

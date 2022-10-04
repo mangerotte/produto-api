@@ -9,3 +9,7 @@ INSERT INTO order_db (instant, order_status, client_id) VALUES ('2022-10-02T11:3
 INSERT INTO order_db (instant, order_status, client_id) VALUES ('2022-10-02T11:31:00Z', 3, 2)
 INSERT INTO order_db (instant, order_status, client_id) VALUES ('2022-10-02T11:31:00Z', 4, 1)
 INSERT INTO order_db (instant, order_status, client_id) VALUES ('2022-10-02T11:31:00Z', 2, 3)
+
+INSERT INTO category_db(name) VALUES ('Computers')
+INSERT INTO category_db(name) VALUES ('Eletronics')
+INSERT INTO category_db(name) VALUES ('Books')

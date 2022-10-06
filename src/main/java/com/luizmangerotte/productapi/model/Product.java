@@ -1,6 +1,5 @@
 package com.luizmangerotte.productapi.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,16 +12,20 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "category_db")
-public class Category {
-
+@Table(name ="product_db")
+public class Product {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String description;
+    private Double price;
+    private String imgUrl;
+    @ManyToMany
+    @JoinTable(name = "product_category_db",
+    joinColumns = @JoinColumn(name = "product_id"),
+    inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories = new HashSet<>();
 
-
-    @ManyToMany(mappedBy = "categories")
-    @JsonIgnore
-    private Set<Product> products = new HashSet<>();
 }

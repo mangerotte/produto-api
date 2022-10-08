@@ -27,3 +27,11 @@ INSERT INTO product_category_db (product_id, category_id) VALUES (3, 2)
 INSERT INTO product_category_db (product_id, category_id) VALUES (4, 1)
 INSERT INTO product_category_db (product_id, category_id) VALUES (4, 2)
 INSERT INTO product_category_db (product_id, category_id) VALUES (5, 3)
+
+INSERT INTO order_item_db (quantity, price, order_id, product_id) VALUES (2, 181.0, 1, 1)
+INSERT INTO order_item_db (quantity, price, order_id, product_id) VALUES (1, 2190.0, 2, 2)
+INSERT INTO order_item_db (quantity, price, order_id, product_id) VALUES (5, 504.95, 3, 5)
+
+INSERT INTO payment_db (moment, order_id) VALUES ('2022-10-02T13:30:00Z', 1)
+INSERT INTO payment_db (moment, order_id) VALUES ('2022-10-04T12:02:00Z', 2)
+INSERT INTO payment_db (moment, order_id) VALUES ('2022-10-03T14:35:00Z', 3)

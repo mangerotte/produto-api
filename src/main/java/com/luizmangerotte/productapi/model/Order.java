@@ -58,4 +58,12 @@ public class Order {
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus.getCode();
     }
+
+    public Double getTotal(){
+        double sum = 0.0;
+        for (OrderItem orderItem : items){
+            sum += orderItem.getSubTotal();
+        }
+        return sum;
+    }
 }

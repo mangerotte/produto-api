@@ -27,7 +27,7 @@ public class UserResource {
     public ResponseEntity<UserDto> findById(@PathVariable Long id){
         return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
     }
-    @PostMapping
+    @PostMapping(value = "/signup")
     public ResponseEntity<User> insert(@RequestBody UserDto obj){
         return new ResponseEntity<>(userService.insert(obj), HttpStatus.CREATED);
     }

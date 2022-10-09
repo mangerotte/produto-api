@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.ResourceAccessException;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,10 +29,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto findById(Long id) {
-        Optional<UserDto> userDto = Optional.ofNullable(
+        return Optional.ofNullable(
                 modelMapper.map(userRepository
-                .findById(id), UserDto.class));
-        return userDto.orElseThrow(()-> new ResourceNotFoundException(id));
+                .findById(id), UserDto.class))
+                .orElseThrow(()-> new ResourceNotFoundException(id));
     }
     @Override
     public List<UserDto> findAll() {
@@ -48,9 +48,14 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public User update(Long id, User obj) {
-        User objDb = userRepository.getReferenceById(id);
-        updateData(userRepository.getReferenceById(id), objDb);
-        return userRepository.save(objDb);
+        try {
+            User objDb = userRepository.getReferenceById(id);
+            updateData(userRepository.getReferenceById(id), objDb);
+            return userRepository.save(objDb);
+        }catch (EntityNotFoundException enfe) {
+            throw new ResourceNotFoundException(id);
+        }
+
     }
 
     @Override

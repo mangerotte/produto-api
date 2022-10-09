@@ -1,6 +1,7 @@
 package com.luizmangerotte.productapi.error.handler;
 
 import com.luizmangerotte.productapi.error.StandardError;
+import com.luizmangerotte.productapi.error.exceptions.DatabaseException;
 import com.luizmangerotte.productapi.error.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,4 +27,17 @@ public class RestExceptionHandler {
                 rnf.getMessage(),
                 request.getRequestURI()), status);
     }
+    @ExceptionHandler(DatabaseException.class)
+    public ResponseEntity<StandardError> database(DatabaseException de,
+                                                          HttpServletRequest request){
+        String error = "Database error";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        return new ResponseEntity<>(new StandardError(
+                Instant.now(),
+                status.value(),
+                error,
+                de.getMessage(),
+                request.getRequestURI()), status);
+    }
+
 }

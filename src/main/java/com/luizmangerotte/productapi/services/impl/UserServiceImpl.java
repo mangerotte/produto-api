@@ -1,6 +1,7 @@
 package com.luizmangerotte.productapi.services.impl;
 
 
+import com.luizmangerotte.productapi.error.exceptions.DatabaseException;
 import com.luizmangerotte.productapi.error.exceptions.ResourceNotFoundException;
 import com.luizmangerotte.productapi.model.User;
 import com.luizmangerotte.productapi.model.dto.UserDto;
@@ -9,6 +10,7 @@ import com.luizmangerotte.productapi.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 
@@ -59,7 +61,13 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public void delete(Long id) {
-        userRepository.deleteById(id);
+        try {
+            userRepository.deleteById(id);
+        }catch (EmptyResultDataAccessException erdae){
+            throw new ResourceNotFoundException(id);
+        }catch (DataIntegrityViolationException dive){
+            throw new DatabaseException(dive.getMessage());
+        }
     }
     private void findByEmail(UserDto userDto){
         Optional<User> user = userRepository.findByEmail(userDto.getEmail());

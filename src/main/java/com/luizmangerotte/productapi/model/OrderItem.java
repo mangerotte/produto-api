@@ -1,5 +1,6 @@
 package com.luizmangerotte.productapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.luizmangerotte.productapi.model.pk.OrderItemPk;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 public class OrderItem {
 
     @EmbeddedId
-    private OrderItemPk id;
+    private OrderItemPk id = new OrderItemPk();
     private Integer quantity;
     private Double price;
 
@@ -41,7 +42,7 @@ public class OrderItem {
     public void setPrice(Double price) {
         this.price = price;
     }
-
+    @JsonIgnore
     public Order getOrder(){
         return id.getOrder();
     }
@@ -56,6 +57,10 @@ public class OrderItem {
 
     public void setProduct(Product product) {
         id.setProduct(product);
+    }
+
+    public Double getSubTotal(){
+        return price * quantity;
     }
 
 

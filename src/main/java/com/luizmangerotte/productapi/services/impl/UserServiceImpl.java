@@ -1,6 +1,7 @@
 package com.luizmangerotte.productapi.services.impl;
 
 
+import com.luizmangerotte.productapi.error.exceptions.ResourceNotFoundException;
 import com.luizmangerotte.productapi.model.User;
 import com.luizmangerotte.productapi.model.dto.UserDto;
 import com.luizmangerotte.productapi.repositories.UserRepository;
@@ -9,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,8 +27,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto findById(Long id) {
-        return modelMapper.map(userRepository
-                .findById(id), UserDto.class);
+        Optional<UserDto> userDto = Optional.ofNullable(
+                modelMapper.map(userRepository
+                .findById(id), UserDto.class));
+        return userDto.orElseThrow(()-> new ResourceNotFoundException(id));
     }
     @Override
     public List<UserDto> findAll() {
@@ -50,7 +54,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateData(User obj, User objDb) {
         objDb.setEmail(obj.getEmail());
-        objDb.setLogin(obj.getLogin());
+        objDb.setName(obj.getName());
         objDb.setPassword(obj.getPassword());
     }
     @Override
